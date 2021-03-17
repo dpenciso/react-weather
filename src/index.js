@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import WeatherInput from './Components/WeatherInput/WeatherInput';
 import reportWebVitals from './reportWebVitals';
+import GetWeather from './Components/GetWeather/GetWeather'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <WeatherInput />
+    <GetWeather />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -18,8 +18,6 @@ import Grid from "@material-ui/core/Grid";
 import FormGroup from "@material-ui/core/FormGroup";
 import Switch from "@material-ui/core/Switch";
 
-const API_KEY = `${process.env.REACT_APP_API_KEY}`;
-
 const AntSwitch = withStyles((theme) => ({
   root: {
     width: 28,
@@ -125,7 +123,7 @@ const GetWeather = () => {
     url: "https://weatherapi-com.p.rapidapi.com/forecast.json",
     params: { q: location, days: 3 },
     headers: {
-      "x-rapidapi-key": API_KEY,
+      "x-rapidapi-key": process.env.REACT_APP_API_KEY,
       "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
     },
   };

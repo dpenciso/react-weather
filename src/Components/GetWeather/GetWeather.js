@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
@@ -131,11 +130,10 @@ const GetWeather = () => {
     },
   };
 
-  const returnWeather = () => {
-    axios
+  const returnWeather = async () => {
+    await axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         setData(response.data);
       })
       .catch(function (error) {
@@ -145,7 +143,6 @@ const GetWeather = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(location);
     returnWeather();
   };
 
@@ -182,7 +179,7 @@ const GetWeather = () => {
       <div>
         {data.hasOwnProperty("location") && (
           <>
-            <Card className={classes.root}>
+            <Card className={classes.root} key={data.location.localtime}>
               <Grid>
                 <FormGroup>
                   <Typography component="div">
@@ -210,7 +207,6 @@ const GetWeather = () => {
                 title={data.location.name}
                 subheader={data.location.region}
               />
-              <CardMedia className={classes.media} image="" title="" />
               <CardContent>
                 <Typography variant="h3" color="textPrimary" component="h3">
                   Current Temperature:{" "}
@@ -244,41 +240,43 @@ const GetWeather = () => {
                   <div>
                     {data.forecast.forecastday.map((day, index) => (
                       <>
-                        <h2>{day.date}:</h2>
-                        <h3>
-                          High:{" "}
-                          {state.checked
-                            ? `${day.day.maxtemp_f} F`
-                            : `${day.day.maxtemp_c} C`}
-                        </h3>
-                        <h3>
-                          Low:{" "}
-                          {state.checked
-                            ? `${day.day.mintemp_f} F`
-                            : `${day.day.mintemp_c} C`}
-                        </h3>
-                        <div>
-                          <h3>Hourly Forecast:</h3>
-                          <Grid container spacing={2}>
-                            {day.hour.map((hour) => (
-                              <>
-                                <Grid item sm={2}>
-                                  <Paper className={classes.paper}>
-                                    <p>{hour.time.slice(11)}</p>
-                                    <p>
-                                      {state.checked
-                                        ? `${hour.temp_f} F`
-                                        : `${hour.temp_c} C`}
-                                    </p>
-                                  </Paper>
-                                </Grid>
-                              </>
-                            ))}
-                          </Grid>
+                        <div key={index}>
+                          <h2>{day.date}:</h2>
+                          <h3>
+                            High:{" "}
+                            {state.checked
+                              ? `${day.day.maxtemp_f} F`
+                              : `${day.day.maxtemp_c} C`}
+                          </h3>
+                          <h3>
+                            Low:{" "}
+                            {state.checked
+                              ? `${day.day.mintemp_f} F`
+                              : `${day.day.mintemp_c} C`}
+                          </h3>
+                          <div>
+                            <h3>Hourly Forecast:</h3>
+                            <Grid container spacing={2}>
+                              {day.hour.map((hour, index) => (
+                                <>
+                                  <Grid item sm={2} key={index}>
+                                    <Paper className={classes.paper}>
+                                      <p>{hour.time.slice(11)}</p>
+                                      <p>
+                                        {state.checked
+                                          ? `${hour.temp_f} F`
+                                          : `${hour.temp_c} C`}
+                                      </p>
+                                    </Paper>
+                                  </Grid>
+                                </>
+                              ))}
+                            </Grid>
+                          </div>
+                          {index < 2 && (
+                            <Divider className={classes.dividerMargin} />
+                          )}
                         </div>
-                        {index < 2 && (
-                          <Divider className={classes.dividerMargin} />
-                        )}
                       </>
                     ))}
                   </div>

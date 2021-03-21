@@ -131,7 +131,7 @@ const GetWeather = () => {
   };
 
   const returnWeather = async () => {
-    await axios
+    const response = await axios
       .request(options)
       .then(function (response) {
         setData(response.data);

@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "1rem",
   },
   tempSwitch: {
-    margin: "2rem 0 1rem 0"
+    margin: "2rem 0 1rem 0",
   },
 }));
 
@@ -131,8 +131,8 @@ const GetWeather = () => {
     },
   };
 
-  const returnWeather = async () => {
-    const getWeather = await axios
+  const returnWeather = () => {
+    axios
       .request(options)
       .then(function (response) {
         console.log(response.data);
@@ -141,7 +141,6 @@ const GetWeather = () => {
       .catch(function (error) {
         console.error(error);
       });
-    console.log(data);
   };
 
   const handleSubmit = (event) => {

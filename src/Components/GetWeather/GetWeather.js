@@ -129,8 +129,6 @@ const GetWeather = () => {
     },
   };
 
-  console.log(process.env.REACT_APP_API_KEY)
-
   const returnWeather = async () => {
     await axios
       .request(options)

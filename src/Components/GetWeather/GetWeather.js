@@ -125,6 +125,7 @@ const GetWeather = () => {
     headers: {
       "x-rapidapi-key": process.env.REACT_APP_API_KEY,
       "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
+      "Access-Control-Allow-Origin": "*"
     },
   };
 

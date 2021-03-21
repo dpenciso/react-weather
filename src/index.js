@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import WeatherInput from './Components/WeatherInput/WeatherInput';
 import reportWebVitals from './reportWebVitals';
 import GetWeather from './Components/GetWeather/GetWeather'
 
 ReactDOM.render(
   <React.StrictMode>
-    <WeatherInput />
     <GetWeather />
   </React.StrictMode>,
   document.getElementById('root')
